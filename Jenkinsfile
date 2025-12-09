@@ -46,18 +46,7 @@ pipeline {
         }
       }
     }
-
-    stage('Restart service') {
-      steps {
-        sshagent (credentials: [env.SSH_CREDENTIALS_ID]) {
-          sh """
-          ssh -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} \\
-          "sudo systemctl restart jarvis.service && sudo systemctl status jarvis.service --no-pager"
-          """
-        }
-      }
-    }
-
+    
     stage('Verify') {
       steps {
         sshagent (credentials: [env.SSH_CREDENTIALS_ID]) {
