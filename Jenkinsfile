@@ -2,18 +2,18 @@ pipeline {
   agent any
 
   environment {
-    EC2_USER = 'ubuntu'   // match var.app_user
-    EC2_HOST = '3.0.20.79'         // set via Jenkins job parameter or credentials
-    SSH_CREDENTIALS_ID = 'jarvis-server' // Jenkins-credentials id (SSH private key)
+    EC2_USER = 'ubuntu'
+    SSH_CREDENTIALS_ID = 'jarvis-server'
     REPO_DIR = '/home/ubuntu/jarvis'
     BRANCH = 'main'
   }
 
   parameters {
-    string(name: '3.0.20.79', defaultValue: '', description: 'Public IP or hostname of EC2')
+    string(name: 'EC2_HOST', defaultValue: '3.0.20.79', description: 'Public IP or hostname of EC2')
   }
 
   stages {
+
     stage('Prepare') {
       steps {
         script {
